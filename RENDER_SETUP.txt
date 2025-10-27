@@ -1,0 +1,122 @@
+📋 RENDER CONFIGURATION - EXACT STEPS
+
+═══════════════════════════════════════════════════════════════════
+
+STEP 1: CURRENT FORM SETTINGS (You're on this step)
+───────────────────────────────────────────────────────────────────
+
+✅ Name: Girjasoft-hrms (ALREADY SET - LEAVE IT)
+✅ Region: Singapore (ALREADY SET - LEAVE IT)  
+✅ Instance Type: Free (ALREADY SET - LEAVE IT)
+
+⚠️  Health Check Path: DELETE "/healthz" → Leave BLANK
+✅ Dockerfile Path: "." (LEAVE AS IS)
+✅ Docker Command: (LEAVE EMPTY)
+
+
+STEP 2: ADD PRE-DEPLOY COMMAND
+───────────────────────────────────────────────────────────────────
+
+In the "Pre-Deploy Command" field, add:
+python3 manage.py migrate
+
+
+STEP 3: ADD ENVIRONMENT VARIABLES (Click "+ Add")
+───────────────────────────────────────────────────────────────────
+
+Add these THREE variables:
+
+┌───────────────────────────────────────────────────────┐
+│ Variable 1:                                            │
+├───────────────────────────────────────────────────────┤
+│ KEY:   DEBUG                                          │
+│ VALUE: False                                          │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ Variable 2:                                            │
+├───────────────────────────────────────────────────────┤
+│ KEY:   SECRET_KEY                                     │
+│ VALUE: django-insecure-change-this-in-production     │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ Variable 3:                                            │
+├───────────────────────────────────────────────────────┤
+│ KEY:   ALLOWED_HOSTS                                  │
+│ VALUE: *.onrender.com                                 │
+└───────────────────────────────────────────────────────┘
+
+
+STEP 4: SAVE AND CREATE WEB SERVICE
+───────────────────────────────────────────────────────────────────
+
+Click "Advanced" (to collapse)
+Click "Create Web Service" button at bottom
+
+WAIT: This will start building (don't add database yet!)
+
+
+STEP 5: AFTER WEB SERVICE IS CREATED (IMPORTANT!)
+───────────────────────────────────────────────────────────────────
+
+Go to your web service dashboard
+Click "Add PostgreSQL" or "Add Database" button
+
+Configure Database:
+  - Choose: PostgreSQL
+  - Plan: FREE
+  - Name: girjasoft-db
+  - Database: girjasoft_main
+
+SAVE DATABASE → Render automatically adds DATABASE_URL!
+
+
+STEP 6: REDEPLOY
+───────────────────────────────────────────────────────────────────
+
+After adding database, click "Manual Deploy" 
+or just wait - it will auto-redeploy
+
+This connects your app to the database!
+
+
+═══════════════════════════════════════════════════════════════════
+
+🎯 WHAT GETS ADDED AUTOMATICALLY BY RENDER:
+───────────────────────────────────────────────────────────────────
+
+✅ DATABASE_URL          → Render adds this automatically
+✅ POSTGRES_HOST         → Render adds this
+✅ POSTGRES_PORT         → Render adds this  
+✅ POSTGRES_PASSWORD     → Render adds this
+✅ PGPASSWORD            → Render adds this
+
+YOU DON'T ADD THESE - RENDER DOES!
+
+
+═══════════════════════════════════════════════════════════════════
+
+⏱️ TIMELINE:
+───────────────────────────────────────────────────────────────────
+
+1. Create Web Service → ~10-15 min
+2. Add PostgreSQL     → ~2-3 min
+3. Redeploy           → ~5-10 min
+4. Total              → ~20-30 minutes
+
+
+═══════════════════════════════════════════════════════════════════
+
+✅ SUMMARY - WHAT YOU ADD:
+───────────────────────────────────────────────────────────────────
+
+✅ DEBUG=false
+✅ SECRET_KEY=...
+✅ ALLOWED_HOSTS=*.onrender.com
+✅ Pre-Deploy Command: python3 manage.py migrate
+
+✅ Add PostgreSQL Database AFTER web service is created
+
+❌ DON'T ADD: DATABASE_URL, DB_ENGINE, DB_NAME, etc.
+

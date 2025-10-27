@@ -1,0 +1,24 @@
+🔍 IMPORTANT: Check your Pre-Deploy Command in Render!
+
+Since migrations are now in entrypoint.sh, you might want to remove or update 
+the Pre-Deploy Command in Render Dashboard.
+
+Current setup in entrypoint.sh:
+✅ Runs makemigrations
+✅ Runs migrate
+✅ Runs collectstatic
+
+IF you have Pre-Deploy Command set to: python3 manage.py migrate
+→ This is REDUNDANT and might cause conflicts
+→ Consider removing it from Render settings
+
+TO FIX:
+1. Go to Render Dashboard
+2. Click your "Girjasoft-hrms" web service
+3. Click "Settings" tab
+4. Scroll to "Pre-Deploy Command"
+5. Either DELETE it or change to just: true
+6. Save changes
+7. Manual deploy or wait for auto-deploy
+
+This will prevent double migrations and let entrypoint.sh handle it properly.

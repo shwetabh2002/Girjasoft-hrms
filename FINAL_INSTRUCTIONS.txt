@@ -1,0 +1,46 @@
+✅ CHANGES PUSHED!
+
+==============================================
+WHAT CHANGED
+==============================================
+
+✅ Removed migrations from entrypoint
+✅ Now only runs: collectstatic + gunicorn
+✅ Fast startup (under 2 minutes)
+
+==============================================
+CRITICAL: REMOVE PRE-DEPLOY COMMAND
+==============================================
+
+⚡ DO THIS NOW IN RENDER DASHBOARD:
+
+1. Go to: https://dashboard.render.com
+2. Click: "Girjasoft-hrms" service  
+3. Click: "Settings" tab
+4. Scroll to: "Pre-Deploy Command"
+5. DELETE everything (make it blank)
+6. Click: "Save Changes"
+7. Wait for auto-deploy or click "Manual Deploy"
+
+❌ WITHOUT THIS FIX, APP WILL FAIL!
+
+==============================================
+WHAT HAPPENS NOW
+==============================================
+
+1. Render auto-deploys your code
+2. Runs collectstatic (quick!)
+3. Starts gunicorn immediately
+4. Port gets detected (no timeout!)
+5. App goes live! 🎉
+
+==============================================
+DEMO DATA
+==============================================
+
+After app is live:
+- Go to your app URL
+- Login page loads
+- Use UI to load demo data
+- Or run migrations manually if needed
+
