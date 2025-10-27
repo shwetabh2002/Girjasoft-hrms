@@ -1,0 +1,38 @@
+🚨 CRITICAL FIX NEEDED IN RENDER:
+
+===================================================
+CURRENT ISSUE
+===================================================
+
+Your app IS LIVE but showing errors because:
+1. ALLOWED_HOSTS is set to "*.onrender.com" (wrong format)
+2. Migrations were commented out (just fixed in code)
+
+===================================================
+WHAT TO DO NOW
+===================================================
+
+Go to Render Dashboard:
+1. Open "Girjasoft-hrms" service
+2. Click "Settings" tab  
+3. Find "Environment Variables"
+4. Find "ALLOWED_HOSTS"
+5. DELETE that variable OR change to: ALLOWED_HOSTS=*
+6. Save changes
+7. Wait for redeploy (happens automatically)
+
+===================================================
+ALTERNATIVE (EASIER)
+===================================================
+
+Just DELETE the ALLOWED_HOSTS variable entirely!
+Your settings.py already has default ALLOWED_HOSTS=["*"]
+
+===================================================
+AFTER THE FIX
+===================================================
+
+✅ App will stop showing DisallowedHost errors
+✅ Database tables will be created (migrations uncommented)
+✅ App will work properly!
+
