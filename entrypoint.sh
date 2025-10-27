@@ -3,15 +3,22 @@ set -e
 
 echo "=== Entrypoint starting ==="
 echo "Waiting for database to be ready..."
-python3 manage.py makemigrations
-echo "=== Migrations done ==="
+
+# Only run makemigrations if there are any changes (silently fail if nothing to create)
+python3 manage.py makemigrations --noinput 2>/dev/null || true
+
+echo "=== Running migrations ==="
 python3 manage.py migrate
-echo "=== Migrate done ==="
+echo "=== Migrations done ==="
+
+echo "=== Collecting static files ==="
 python3 manage.py collectstatic --noinput || true
 echo "=== Collectstatic done ==="
 
 # Use PORT environment variable or default to 10000
 PORT=${PORT:-10000}
-echo "Starting gunicorn on port $PORT..."
+echo "=== Starting gunicorn on port $PORT ==="
 echo "Command: gunicorn --bind 0.0.0.0:$PORT horilla.wsgi:application"
-exec gunicorn --bind 0.0.0.0:$PORT --timeout 120 horilla.wsgi:application
+
+# Keep gunicorn in foreground with logging
+exec gunicorn --bind 0.0.0.0:$PORT --access-logfile - --error-logfile - --log-level info horilla.wsgi:application
