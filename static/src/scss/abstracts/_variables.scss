@@ -42,15 +42,15 @@ $sidebar-color: hsl(192, 15%, 94%) !default;
 
 /// Brand color dark
 /// @type Color
-$brand-color-dark:  hsl(245, 100%, 8%)!default;
+$brand-color-dark:  hsl(210, 100%, 8%)!default;
 
 /// Secondary color
 /// @type Color
-$secondary-color: hsl(8, 77%, 56%) !default;
+$secondary-color: hsl(207, 70%, 53%) !default;
 
 /// Secondary color dark
 /// @type Color
-$secondary-color-dark: hsl(8, 61%, 50%) !default;
+$secondary-color-dark: hsl(207, 62%, 48%) !default;
 
 /// White  color
 /// @type Color
@@ -220,7 +220,7 @@ $max-width: 1180px !default;
 /// OrgChart Colors
 /// @type Color
 
-$org-chart-primary: hsl(8, 77%, 56%);
+$org-chart-primary: hsl(207, 70%, 53%);
 $org-chart-secondary:hsl(12, 17%, 29%);
 $org-chart-tertiary: hsl(12, 19%, 69%);
 $org-chart-quaternary: hsl(193, 100%, 39%);
