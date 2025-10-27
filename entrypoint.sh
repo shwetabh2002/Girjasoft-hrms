@@ -4,8 +4,8 @@ set -e
 echo "=== Entrypoint starting ==="
 echo "Waiting for database to be ready..."
 
-# Only run makemigrations if there are any changes (silently fail if nothing to create)
-python3 manage.py makemigrations 
+# Create migrations if needed
+python3 manage.py makemigrations --noinput 2>/dev/null || true
 
 echo "=== Running migrations ==="
 python3 manage.py migrate
@@ -21,13 +21,4 @@ echo "=== Starting gunicorn on port $PORT ==="
 echo "Command: gunicorn --bind 0.0.0.0:$PORT horilla.wsgi:application"
 
 # Keep gunicorn in foreground with logging
-python3 manage.py createhorillauser --first_name admin --last_name admin --username admin --password admin --email admin@example.com --phone 1234567890
-gunicorn --bind 0.0.0.0:8000 horilla.wsgi:application
-#!/bin/bash
-
-# echo "Waiting for database to be ready..."
-# python3 manage.py makemigrations
-# python3 manage.py migrate
-# python3 manage.py collectstatic --noinput
-# python3 manage.py createhorillauser --first_name admin --last_name admin --username admin --password admin --email admin@example.com --phone 1234567890
-# gunicorn --bind 0.0.0.0:8000 horilla.wsgi:application
+exec gunicorn --bind 0.0.0.0:$PORT --access-logfile - --error-logfile - --log-level info horilla.wsgi:application
