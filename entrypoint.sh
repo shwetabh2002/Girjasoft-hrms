@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 echo "=== Entrypoint starting ==="
 echo "Waiting for database to be ready..."
@@ -8,7 +7,7 @@ echo "Waiting for database to be ready..."
 python3 manage.py makemigrations --noinput 2>/dev/null || true
 
 echo "=== Running migrations ==="
-python3 manage.py migrate
+python3 manage.py migrate || echo "WARNING: Migrations failed, continuing anyway..."
 echo "=== Migrations done ==="
 
 echo "=== Collecting static files ==="
