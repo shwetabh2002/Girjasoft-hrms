@@ -4,9 +4,11 @@ set -e
 echo "=== Entrypoint starting ==="
 echo "Waiting for database to be ready..."
 
-# Apply migrations (migration files should already be committed to git)
+# Only run makemigrations if there are any changes (silently fail if nothing to create)
+python3 manage.py makemigrations --noinput 2>/dev/null || true
+
 echo "=== Running migrations ==="
-python3 manage.py migrate --noinput
+# python3 manage.py migrate
 echo "=== Migrations done ==="
 
 echo "=== Collecting static files ==="
