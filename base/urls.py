@@ -1004,9 +1004,9 @@ urlpatterns = [
         name="emp-workinfo-complete",
     ),
     path(
-        "get-horilla-installed-apps/",
-        views.get_horilla_installed_apps,
-        name="get-horilla-installed-apps",
+        "get-girjasoft-installed-apps/",
+        views.get_girjasoft_installed_apps,
+        name="get-girjasoft-installed-apps",
     ),
     path("configuration/holiday-view", views.holiday_view, name="holiday-view"),
     path(
