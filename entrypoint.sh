@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 echo "=== Entrypoint starting ==="
 echo "Waiting for database to be ready..."
