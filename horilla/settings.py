@@ -118,6 +118,11 @@ if env("DATABASE_URL", default=None):
     DATABASES = {
         "default": env.db(),
     }
+    # Add SSL requirement for Render PostgreSQL
+    if "render.com" in DATABASES["default"]["HOST"]:
+        DATABASES["default"]["OPTIONS"] = {
+            "sslmode": "require",
+        }
 else:
     DATABASES = {
         "default": {
